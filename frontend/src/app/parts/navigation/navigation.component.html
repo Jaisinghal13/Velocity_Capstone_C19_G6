@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand mt-3" [routerLink]="root">
+        <img src="/assets/brand.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span class="font-weight-bold text-dark pl-2 nav-main-heading">Shop For Home</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+        <div class="navbar-nav" *ngIf="!currentUser || currentUser.role == Role.Customer">
+
+            <a class="nav-item nav-link text-dark font-weight-bold nav-headers"
+               routerLink="/category/0">
+               Mobiles
+            </a>
+            <a class="nav-item nav-link text-dark font-weight-bold nav-headers"
+               routerLink="/category/1">
+               Skin Care
+            </a>
+            <a class="nav-item nav-link text-dark font-weight-bold nav-headers"
+               routerLink="/category/2">
+               Home Furnishings
+            </a>
+            <a class="nav-item nav-link text-dark font-weight-bold nav-headers"
+               routerLink="/category/3">
+               Fashion
+            </a>
+
+           
+
+        </div>
+
+        
+
+        <div class="navbar-nav ml-auto">
+
+            <div class="navbar-nav" *ngIf="currentUser && currentUser.role == Role.Customer">
+                <a class="nav-item nav-link nav-headers font-weight-bold" style="color: black;" routerLink="/wishlist"><i class="fas fa-heart mr-2"></i>Wishlist</a>
+            </div>
+
+            <a *ngIf="!currentUser || currentUser.role == Role.Customer"
+                    class="nav-item nav-link text-dark font-weight-bold nav-headers" routerLink="/cart">
+                <i class="fas fa-shopping-cart"></i>
+                Cart
+            </a>
+
+            <div class="navbar-nav" *ngIf="currentUser && currentUser.role == Role.Manager">
+
+                <a class="nav-item nav-link nav-headers font-weight-bold" style="color: black;" routerLink="/discount"><i class="fas fa-tag"></i>Discount</a>
+                <a class="nav-item nav-link nav-headers font-weight-bold" style="color: black;" (click)=getUsers() routerLink="/admin/user"><i class="fas fa-user mr-2"></i>Users</a>
+                <a class="nav-item nav-link nav-headers font-weight-bold" style="color: black;" routerLink="/seller/product"><i class="fas fa-layer-group"></i>Stocks</a>
+            </div>
+
+            <ng-container *ngIf="currentUser; else noUser">
+                
+               <!-- <a class="nav-item nav-link"  routerLink="/discount">Discount</a>
+                <a class="nav-item nav-link" (click)=getUsers() routerLink="/admin/user">Users</a>
+                <a class="nav-item nav-link" routerLink="/seller/product">Stocks</a> -->
+                <a class="nav-item nav-link text-dark font-weight-bold nav-headers" routerLink="/order">
+                    <i class="fas fa-list-ul"></i>
+                    Orders
+                </a>
+                <a class="nav-item nav-link text-dark font-weight-bold nav-headers" routerLink="/profile">
+                    {{name}}
+                </a>
+                <a class="nav-item nav-link text-dark font-weight-bold nav-headers" (click)="logout()" routerLink="/login" [queryParams]="{logout: true}">
+                    Log Out
+                </a>
+            </ng-container>
+            <ng-template #noUser>
+                <a class="nav-item nav-link text-dark font-weight-bold nav-headers" routerLink="/login">
+                    Login
+                </a>
+                <a class="nav-item nav-link text-dark font-weight-bold nav-headers" routerLink="/register">
+                    Register
+                </a>
+            </ng-template>
+            
+            </div>
+    </div>
+</nav>

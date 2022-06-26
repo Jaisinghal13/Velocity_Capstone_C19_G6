@@ -1,0 +1,57 @@
+
+<section class="h-100 h-custom">
+    <div class="search-div mt-0">
+        <input class="search-input" placeholder="Search Products for You!"  type = "text" name="search" [(ngModel)]="searchText">
+        <button class="search-button" (click)="search()">Search</button>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h1>Add Coupon</h1>
+                    <input [(ngModel)]="coupon" type="text" class="form-control form-control-lg" id="coupon" name="coupon" placeholder="Enter coupon code">    
+                    <button (click)=addCoupon(coupon) align="right" class="btn btn-success btn-lg mt-2">Add</button>
+                </div>
+            </div>
+        </div>
+
+    <div class="h-100 container py-5">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                    <th scope="col">Couponcode</th>
+                    <th scope="col">Action</th>
+                    
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let coupon of page?.content | filter:searchText">
+                  <th scope="row">
+                    <div class="d-flex align-items-center">
+                      <div class="flex-column ms-4">
+                        <a>
+                            <p class="mb-0 ml-2" style="font-size: 14px;">{{coupon.id}}</p>
+                        </a>
+                      </div>
+                    </div>
+                  </th>
+                  <td class="align-middle">
+                    <button (click)=deleteCoupon(coupon.id)  class="btn btn-danger btn-lg">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+
+<app-pagination [currentPage]="page"></app-pagination>
